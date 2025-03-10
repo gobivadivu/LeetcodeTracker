@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
             li.addEventListener("click", function () {
                 alert(`Opening: ${problem.title}`);
-                window.open(`https://leetcode.com/problems/${problem.title.toLowerCase().replace(/ /g, "-")}/`, "_blank");
+                window.open(problem.url, "_blank");
             });
             problemList.appendChild(li);
         });

@@ -15,7 +15,8 @@ function getProblemDetails() {
         let problem = {
             title: titleElement.textContent.trim(),
             difficulty: difficultyElement.textContent.trim(),
-            timestamp: new Date().toLocaleString()
+            timestamp: new Date().toLocaleString(),
+            url: window.location.href//store URL and later retrieve
         };
 
         chrome.storage.sync.get("problems", function (data) {
