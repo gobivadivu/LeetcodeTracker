@@ -18,22 +18,29 @@ function getProblemDetails() {
             timestamp: new Date().toLocaleString()
         };
 
-        chrome.storage.sync.get("problems", function(data) {
+        chrome.storage.sync.get("problems", function (data) {
             let problems = data.problems || [];
-
-             //  Check if the problem is already in the list
-            let isDuplicate = problems.some(p => p.title === problem.title);
-
-            // Store only if it's a new problem
-            if (!isDuplicate) {
-                problems.unshift(problem);
-                if (problems.length > 5) problems.pop(); // Keep only the last 5 problems
-
-                chrome.storage.sync.set({ problems: problems }, function() {
-                    console.log("Problem stored:", problem);
-                });
+        
+            // Find the index of the problem if it already exists
+            let existingIndex = problems.findIndex(p => p.title === problem.title);
+        
+            if (existingIndex !== -1) {
+                // Remove the existing problem from its old position
+                problems.splice(existingIndex, 1);
             }
+        
+            // Add the problem at the top
+            problems.unshift(problem);
+        
+            // Keep only the last 5 problems
+            if (problems.length > 5) problems.pop();
+        
+            // Save the updated list
+            chrome.storage.sync.set({ problems: problems }, function () {
+                console.log("Problem stored:", problem);
+            });
         });
+        
         
     } else {
         console.warn("Could not find problem details on this page.");
