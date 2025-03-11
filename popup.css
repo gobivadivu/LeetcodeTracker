@@ -22,11 +22,29 @@ li {
     margin: 5px 0;
     border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    font-family: 'Times New Roman', Times, serif;
 }
 
 li:nth-child(odd) {
     background: #e9ecef;
 }
+
+li:hover {
+    background: black;
+    color: beige;
+}
+
+#clear-history{
+    background-color: black;
+    color: beige;
+    border-radius: 5px;
+    padding: 3px;
+    font-size: smaller;
+    position: fixed;
+    right: 10px;
+    bottom: 5px;
+}
+
 
 chrome.storage.sync.get("problems", function(data) {
     console.log(data.problems);

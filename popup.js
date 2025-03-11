@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(){
     let problemList = document.getElementById('problem-list');
+    let clearButton = document.getElementById('clear-history');
 
     chrome.storage.sync.get("problems", function(data){
         console.log("Stored PRoblems:", data.problems);
@@ -24,4 +25,11 @@ document.addEventListener("DOMContentLoaded", function(){
             problemList.appendChild(li);
         });
     });
+
+    clearButton.addEventListener("click", function() {
+        chrome.storage.sync.set({problems: []}, function() {
+            problemList.innerHTML = "<p> No problems found. </p>";
+            console.log("History cleared");
+        })
+    })
 });
